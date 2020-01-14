@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="{{ with .Site.LanguageCode }}{{ . }}{{ else }}en-US{{ end }}">
+{{partial "header.html" .}}
+<body>
+  <div id="sysmsg" class="sysmsg" ></div>
+{{partial "nav.html" .}}
+{{if .Content.Done}}
+<h1>{{index .Content.Body 0}}</h1><br>
+{{- end}}
+{{ .Site.Content }}
+  <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span>
+{{partial "footer.html" .}}
+</body>
+</html>

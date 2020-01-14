@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="{{ with .Site.LanguageCode }}{{ . }}{{ else }}en-US{{ end }}">
+{{partial "header.html" .}}
+<body>
+  <div id="sysmsg" class="sysmsg" ></div>
+{{partial "nav.html" .}}
+{{ if .HTMLContent.Done}}
+{{range .HTMLContent.Body}}
+    <h1>{{ . }}</h1><br>
+{{- end}}{{- end}}
+{{ if .Content.Done}}
+{{range .Content.Body}}
+    <h1>{{ . }}</h1><br>
+{{- end}}{{- end}}
+  <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span>
+{{{block "content" .}}{{end}}
+{{partial "footer.html" .}}
+</body>
+</html>

@@ -1,0 +1,7 @@
+<form action="/user/" method="post">
+New Password: <input type="text" name="password_a" value="user"><br>
+Confirm Password: <input type="text" name="password_b" value="user"><br>
+<input type="hidden" name="param" value="restorepass" />
+<input type="hidden" name="token" value="{{index .Content.Body 1}}" />
+<input type="submit" value="Submit">
+</form>

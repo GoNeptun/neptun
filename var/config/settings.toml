@@ -1,0 +1,33 @@
+
+[database]
+  database_name = "neptun"
+  host = "127.0.0.1"
+  password = "$2a##Fch3lM2H5dZhjnWIsYqrPXKdHgc0RWtP6qJlJ60F3nk"
+  port = "8889"
+  protocol = "tcp"
+  type = "mysql"
+  user = "root"
+
+[email]
+  address = "user@example.com"
+  host = "mail.example.com"
+  password = "$2a##EtRSbU1Rh1mZ9GFQ50rTyM9fo-H3NR6wW1d7kjz_7rk"
+  port = "587"
+  reply = "user@example.com"
+  user = "user@example.com"
+
+[memcached]
+  host = "127.0.0.1"
+  port = "11211"
+
+[redis]
+  host = "redis://localhost"
+
+[server]
+  logs_dir = "var/log/"
+  port = "8090"
+  ip = "127.0.0.1"
+  baseurl = ""
+  content_dir = "var/www/Neptun/"
+  site_config_dir = "var/www/Neptun/config/"
+  site_config_name = "settings"

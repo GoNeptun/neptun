@@ -1,0 +1,20 @@
+  theme = "base"
+  languageCode = "en-us"
+  googleAnalytics = ""
+  name = ""
+  custom_css = []
+  custom_js  = []
+  disableFonts = false
+  ignoreFiles = [ "\\.scss$", "\\.sass$" ]
+  static_dir = ["css", "font-awesome", "fonts", "img", "js"]
+
+  [params]
+
+  description = "Litecoin is a cryptocurrency that enables instant payments to anyone in the world and that can be efficiently mined with consumer-grade hardware."
+
+  [Languages]
+  # ENGLISH _____________________________
+    [Languages.en]
+      lang = "English"
+      title = "Neptun DCF"
+      weight = 7
