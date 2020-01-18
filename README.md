@@ -1,5 +1,5 @@
 # Neptun CMS
-A Fast Dynamic Content Framework (DCF) for building websites written in Go by [[sucsessyan] (https://github.com/sucsessyan)]
+A Fast Dynamic Content Framework (DCF) for building websites written in Go by [sucsessyan](https://github.com/sucsessyan)
 
 [![GoDoc](https://godoc.org/github.com/goneptun/neptun?status.svg)](https://godoc.org/github.com/goneptun/neptun)
 [![Build Status](https://travis-ci.com/goneptun/neptun.png)](https://travis-ci.com/goneptun/neptun)
