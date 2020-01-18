@@ -42,7 +42,7 @@ func RegStatus(w http.ResponseWriter, r *http.Request) {
 	if m {
 		//Forbid registration
 		ForbidRegistration()
-		w.Write([]byte(`{"success": 1, "answer":{"status": "Forbiden", "style":"red", "button":"Allow User Registration"}}`))
+		w.Write([]byte(`{"success": 1, "answer":{"status": "Forbidden", "style":"red", "button":"Allow User Registration"}}`))
 	} else {
 		//Allow registration
 		AllowRegistration()

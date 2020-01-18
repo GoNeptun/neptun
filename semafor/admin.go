@@ -88,7 +88,7 @@ func Admin(w http.ResponseWriter, r *http.Request) {
 				RmM = "Forbid registration"
 				Rmc = "color:green"
 			} else {
-				Rm = "Forbiden"
+				Rm = "Forbidden"
 				RmM = "Allow registration"
 				Rmc = "color:red"
 			}
