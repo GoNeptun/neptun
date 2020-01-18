@@ -37,6 +37,9 @@ func DBCheck() bool {
 	n := GetDBString()
 	//n[0] = type, n[1] = database
 	db, err := sqlx.Open(n[0], n[1])
+	if err != nil {
+		SetErrorLog(err.Error())
+	}
 	err = db.Ping()
 	if err != nil {
 		return false
