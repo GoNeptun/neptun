@@ -1,0 +1,21 @@
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href="/">Home</a>
+  {{if .Menu.Done}}
+  {{if .Menu.Login }}
+  <a href="/profile/">Profile</a>
+  <a href="/logout/">Log Out</a>
+  {{- else }}
+  <a href="/signin/">Sign In</a>
+  {{if .Menu.IsRegistration }}
+  <a href="/signup/">Sign Up</a>
+    {{- end }}
+    {{- end }}
+    <br>
+    {{if .Menu.Admin }}
+    <a href="/admin/">Admin Panel</a>
+    <br>
+    {{- end }}
+{{- end }}
+  <a href="/exit">Exit</a>
+</div>

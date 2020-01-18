@@ -1,0 +1,16 @@
+
+<script  type='text/javascript'  src="{{ .Site.BaseURL }}/static/js/jquery-3.4.1.min.js"></script>
+{{- if .Header.JS.Done}}
+{{- range .Header.JS.Body}}
+<script  type='text/javascript'  src="{{ $.Site.BaseURL }}/static/js/{{ . }}"></script>
+{{- end}}
+{{- end}}
+<script>
+function openNav() {
+  document.getElementById("mySidenav").style.width = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+}
+</script>
