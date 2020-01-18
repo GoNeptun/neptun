@@ -17,8 +17,8 @@
 package semafor
 
 import (
-	"html/template"
 	sf "../system_functions"
+	"html/template"
 	//"fmt"
 )
 
@@ -35,7 +35,7 @@ func (r *HTMLData) MenuToHTML(Login bool, Admin bool) {
 func (r *HTMLData) RegDataToHTML(reg bool) {
 
 	r.Menu = MenuData{
-		Done:  true,
+		Done:           true,
 		IsRegistration: reg,
 	}
 
@@ -43,8 +43,8 @@ func (r *HTMLData) RegDataToHTML(reg bool) {
 
 func (r *HTMLData) HeaderToHTML(Title string) {
 
-n := sf.LoadTitle()
-fullTitle := Title + " | " + n
+	n := sf.LoadTitle()
+	fullTitle := Title + " | " + n
 	r.Site = SiteStruct{
 		Title: fullTitle,
 	}
@@ -54,8 +54,8 @@ fullTitle := Title + " | " + n
 func (r *HTMLData) BodyToHTML(body []string) {
 
 	r.Content = ContentData{
-		Done: true,
-		Body: append(body),
+		Done:  true,
+		Body:  append(body),
 		Title: body[0],
 	}
 
@@ -63,37 +63,35 @@ func (r *HTMLData) BodyToHTML(body []string) {
 
 func (r *HTMLData) HTMLBodyToHTML(body []template.HTML) {
 
-	r.HTMLContent = HTMLContentData {
-		Done: true,
-		Body: append(body),
+	r.HTMLContent = HTMLContentData{
+		Done:  true,
+		Body:  append(body),
 		Title: body[0],
 	}
 
-
 }
 
-func (r *HTMLData) JstoHtml (files []string) {
+func (r *HTMLData) JstoHtml(files []string) {
 
-		r.Header.JS = Jsdata{
-			Done: true,
-			Body: append(files),
-
+	r.Header.JS = Jsdata{
+		Done: true,
+		Body: append(files),
 	}
 }
 
 func (r *HTMLData) StandartInfo() {
 
-	r.Site = SiteStruct {
+	r.Site = SiteStruct{
 		LanguageCode: sf.LangCode(),
-		BaseURL: template.URL(sf.BaseURL()),
-		Title: r.Site.Title,
+		BaseURL:      template.URL(sf.BaseURL()),
+		Title:        r.Site.Title,
 	}
 
-r.Site.Language = Lang {
-	Lang: "en",
-}
+	r.Site.Language = Lang{
+		Lang: "en",
+	}
 
-r.Site.Params = sf.ParamsConfig(string(r.Site.Language.Lang))
-r.IsTranslated = true
-r.Site.Menus = sf.MenusConfig(string(r.Site.Language.Lang))
+	r.Site.Params = sf.ParamsConfig(string(r.Site.Language.Lang))
+	r.IsTranslated = true
+	r.Site.Menus = sf.MenusConfig(string(r.Site.Language.Lang))
 }

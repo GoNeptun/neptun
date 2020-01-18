@@ -30,11 +30,11 @@ func Signup(w http.ResponseWriter, r *http.Request) {
 	//Check for Maintenance
 	var m = sf.CheckMaintenanceMode()
 
-	if !m  {
+	if !m {
 
 		//Check for session
 		var session, _ = sf.CheckSession(r, "")
-var rs = sf.CheckRegistration()
+		var rs = sf.CheckRegistration()
 		if !session && rs {
 			//Unautorisated person
 
@@ -47,7 +47,6 @@ var rs = sf.CheckRegistration()
 				var bd = []string{"Sign Up Please"}
 				data.BodyToHTML(bd) //Content
 				data.ShowPage(w, r, "signup.html")
-
 
 			case "POST":
 				// Call ParseForm() to parse the raw query and update r.PostForm and r.Form.
@@ -84,8 +83,8 @@ var rs = sf.CheckRegistration()
 					s := sf.IsEmailConfirmation()
 
 					if s != false {
-					//Send confirmation email
-					SendConfirmationEmail(creds.Mail, creds.Username)
+						//Send confirmation email
+						SendConfirmationEmail(creds.Mail, creds.Username)
 					}
 					/////
 					var data = HTMLData{}
@@ -94,7 +93,6 @@ var rs = sf.CheckRegistration()
 					var bd = []string{"You are Signed Up! Please Sign In!"}
 					data.BodyToHTML(bd) //Content
 					data.ShowPage(w, r, service)
-
 
 				} else {
 					var s = HTMLData{}
@@ -109,10 +107,9 @@ var rs = sf.CheckRegistration()
 		}
 
 	} else {
-	Maintenance(w, r)
+		Maintenance(w, r)
 	}
 }
-
 
 func SendConfirmationEmail(mail string, uname string) {
 	//Send confirmation email
@@ -135,7 +132,7 @@ func SendConfirmationEmail(mail string, uname string) {
 	updatedData := [][]string{
 		{"mailsent", lg},
 	}
-ns := "`name` = '" + uname + "'"
+	ns := "`name` = '" + uname + "'"
 	sf.UpdateRow("users", updatedData, ns)
 	/*
 			 curldata := [][] string {

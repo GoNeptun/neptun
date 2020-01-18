@@ -21,8 +21,7 @@ import (
 	"net/http"
 )
 
-
-func  ChangeEmail (w http.ResponseWriter, r *http.Request) {
+func ChangeEmail(w http.ResponseWriter, r *http.Request) {
 	//Check for session
 	var session, _ = sf.CheckSession(r, "")
 
@@ -33,20 +32,18 @@ func  ChangeEmail (w http.ResponseWriter, r *http.Request) {
 	} else {
 		//Autorisated person
 
-			//update cookie. Need to set time for update. Now it is updated evry time
-			sf.UpdateSession(w, r, "session_token")
+		//update cookie. Need to set time for update. Now it is updated evry time
+		sf.UpdateSession(w, r, "session_token")
 
-			var data = HTMLData{}
-			data.HeaderToHTML("Change Email") //Title
-			data.MenuToHTML(true, sf.IsSession(r, "admin_token"))      //Menu
+		var data = HTMLData{}
+		data.HeaderToHTML("Change Email")                     //Title
+		data.MenuToHTML(true, sf.IsSession(r, "admin_token")) //Menu
 
-			jsfiles := []string{"query.js",}
-			data.JstoHtml(jsfiles)
-			var bd = []string{"Change Email"}
-			data.BodyToHTML(bd) //Content
-			data.ShowPage(w, r, "change_email.html")
-
-
+		jsfiles := []string{"query.js"}
+		data.JstoHtml(jsfiles)
+		var bd = []string{"Change Email"}
+		data.BodyToHTML(bd) //Content
+		data.ShowPage(w, r, "change_email.html")
 
 	}
 

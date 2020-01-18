@@ -25,7 +25,6 @@ type MailConfDB struct {
 	Mail int `db:"mail_confirmed"`
 }
 
-
 func UpdateMailDataFromtDB(Value string) {
 	updatedData := [][]string{
 		{"mail_confirmation", Value},
@@ -80,8 +79,8 @@ func CheckMailConfStatus() bool {
 func UserMailConf(uname string) bool {
 	var m bool = CheckMailConfStatus()
 	if m {
-//Check does user confirm his email
-n := GetMemcachedSettings()
+		//Check does user confirm his email
+		n := GetMemcachedSettings()
 		mc := memcache.New(n)
 		it, err := mc.Get(uname)
 		if err != nil {
@@ -103,10 +102,9 @@ n := GetMemcachedSettings()
 			if user.Mail != 0 {
 				mc.Set(&memcache.Item{Key: uname, Value: []byte("1"), Expiration: 0})
 
-
 				return true
 			} else {
-					return false
+				return false
 			}
 		}
 
@@ -120,7 +118,6 @@ n := GetMemcachedSettings()
 		} else {
 			return false
 		}
-
 
 	} else {
 		return true

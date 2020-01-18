@@ -21,8 +21,8 @@ import (
 	"github.com/microcosm-cc/bluemonday"
 	"golang.org/x/crypto/bcrypt"
 	"net/http"
-	"time"
 	"strconv"
+	"time"
 )
 
 func UserAPI(w http.ResponseWriter, r *http.Request) {
@@ -87,152 +87,149 @@ func UserAPI(w http.ResponseWriter, r *http.Request) {
 
 }
 
-func ChangePass (w http.ResponseWriter, r *http.Request) {
+func ChangePass(w http.ResponseWriter, r *http.Request) {
 	//1. Check IsSession
 	var session, uname = sf.CheckSession(r, "")
 
 	if session {
 
-// Check User Password
-n := "`name` = '" + uname + "'"
-SqlAnswer := sf.SelectFrom("pass", "users", n)
-var user UsersTable
-for SqlAnswer.Next() {
+		// Check User Password
+		n := "`name` = '" + uname + "'"
+		SqlAnswer := sf.SelectFrom("pass", "users", n)
+		var user UsersTable
+		for SqlAnswer.Next() {
 
-	err := SqlAnswer.StructScan(&user)
-	if err != nil {
+			err := SqlAnswer.StructScan(&user)
+			if err != nil {
 
-		sf.SetErrorLog(err.Error())
-	}
-}
-p := bluemonday.UGCPolicy()
-pas, err := r.URL.Query()["oldpass"]
-if err {
-	sf.SetErrorLog("No Get['oldpass']")
-}
-pass := p.Sanitize(pas[0])
-if !err || len(pass) > 1 {
+				sf.SetErrorLog(err.Error())
+			}
+		}
+		p := bluemonday.UGCPolicy()
+		pas, err := r.URL.Query()["oldpass"]
+		if err {
+			sf.SetErrorLog("No Get['oldpass']")
+		}
+		pass := p.Sanitize(pas[0])
+		if !err || len(pass) > 1 {
 
-	newpas, err := r.URL.Query()["newpass"]
-	if err {
-		sf.SetErrorLog("No Get['newpass']")
-	}
-	newpass := p.Sanitize(newpas[0])
-	if !err || len(newpass) > 1 {
+			newpas, err := r.URL.Query()["newpass"]
+			if err {
+				sf.SetErrorLog("No Get['newpass']")
+			}
+			newpass := p.Sanitize(newpas[0])
+			if !err || len(newpass) > 1 {
 
-if newpass != pass {
+				if newpass != pass {
 
-//Check password
-	if err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(pass)); err != nil {
-			// If the two passwords don't match
-				w.Write([]byte(`{"success": 0, "error":"Wrong Password"}`))
-	} else {
+					//Check password
+					if err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(pass)); err != nil {
+						// If the two passwords don't match
+						w.Write([]byte(`{"success": 0, "error":"Wrong Password"}`))
+					} else {
 
-//Rewrite password
+						//Rewrite password
 
-hashedPassword, err := bcrypt.GenerateFromPassword([]byte(newpass), 8)
-if err != nil {
+						hashedPassword, err := bcrypt.GenerateFromPassword([]byte(newpass), 8)
+						if err != nil {
 
-	sf.SetErrorLog(err.Error())
-}
-stringpass := "'" + string(hashedPassword) + "'"
-updatedData := [][]string{
-	{"`pass`", stringpass},
-}
-nv := "`name` = '" + uname + "'"
-sf.UpdateRow("users", updatedData, nv)
+							sf.SetErrorLog(err.Error())
+						}
+						stringpass := "'" + string(hashedPassword) + "'"
+						updatedData := [][]string{
+							{"`pass`", stringpass},
+						}
+						nv := "`name` = '" + uname + "'"
+						sf.UpdateRow("users", updatedData, nv)
 
-w.Write([]byte(`{"success": 1, "answer":"The Password successfully updated"}`))
+						w.Write([]byte(`{"success": 1, "answer":"The Password successfully updated"}`))
 
-	}
-} else {
-	w.Write([]byte(`{"success": 0, "error":"Your New Password is same with New one"}`))
-}
-} else {
-	w.Write([]byte(`{"success": 0, "error":"Wrong Request"}`))
-}
+					}
+				} else {
+					w.Write([]byte(`{"success": 0, "error":"Your New Password is same with New one"}`))
+				}
+			} else {
+				w.Write([]byte(`{"success": 0, "error":"Wrong Request"}`))
+			}
 
-
-} else {
-		w.Write([]byte(`{"success": 0, "error":"Wrong Request"}`))
-}
+		} else {
+			w.Write([]byte(`{"success": 0, "error":"Wrong Request"}`))
+		}
 
 	} else {
 		w.Write([]byte(`{"success": 0, "error":"Unautorisated person"}`))
 	}
 }
 
-func ChangeUserEmail (w http.ResponseWriter, r *http.Request) {
+func ChangeUserEmail(w http.ResponseWriter, r *http.Request) {
 	//1. Check IsSession
 	var session, uname = sf.CheckSession(r, "")
 
 	if session {
 
-// Check User Password and email
-n := "`name` = '" + uname + "'"
-SqlAnswer := sf.SelectFrom("pass, mail", "users", n)
-var user UsersTable
-for SqlAnswer.Next() {
+		// Check User Password and email
+		n := "`name` = '" + uname + "'"
+		SqlAnswer := sf.SelectFrom("pass, mail", "users", n)
+		var user UsersTable
+		for SqlAnswer.Next() {
 
-	err := SqlAnswer.StructScan(&user)
-	if err != nil {
+			err := SqlAnswer.StructScan(&user)
+			if err != nil {
 
-		sf.SetErrorLog(err.Error())
-	}
-}
-p := bluemonday.UGCPolicy()
-pas, err := r.URL.Query()["pass"]
-if err {
-	sf.SetErrorLog("No Get['pass']")
-}
-pass := p.Sanitize(pas[0])
-if !err || len(pass) > 1 {
-mail, err := r.URL.Query()["email"]
-if err {
-	sf.SetErrorLog("No Get['email']")
-}
-email := p.Sanitize(mail[0])
-if !err || len(email) > 1 {
+				sf.SetErrorLog(err.Error())
+			}
+		}
+		p := bluemonday.UGCPolicy()
+		pas, err := r.URL.Query()["pass"]
+		if err {
+			sf.SetErrorLog("No Get['pass']")
+		}
+		pass := p.Sanitize(pas[0])
+		if !err || len(pass) > 1 {
+			mail, err := r.URL.Query()["email"]
+			if err {
+				sf.SetErrorLog("No Get['email']")
+			}
+			email := p.Sanitize(mail[0])
+			if !err || len(email) > 1 {
 
-if email != user.Mail {
-//Check password
-	if err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(pass)); err != nil {
-			// If the two passwords don't match
-				w.Write([]byte(`{"success": 0, "error":"Wrong Password"}`))
-	} else {
-// Check does the email is unical
-condition := "mail = '" + email + "'"
-v := sf.CountRows("*", "users", condition)
+				if email != user.Mail {
+					//Check password
+					if err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(pass)); err != nil {
+						// If the two passwords don't match
+						w.Write([]byte(`{"success": 0, "error":"Wrong Password"}`))
+					} else {
+						// Check does the email is unical
+						condition := "mail = '" + email + "'"
+						v := sf.CountRows("*", "users", condition)
 
-if v == 0 {
-//Send new confirmation email
+						if v == 0 {
+							//Send new confirmation email
 
-SendConfirmationEmail(email, uname)
+							SendConfirmationEmail(email, uname)
 
-w.Write([]byte(`{"success": 1, "answer":"Please check your new email for confirmation letter"}`))
+							w.Write([]byte(`{"success": 1, "answer":"Please check your new email for confirmation letter"}`))
 
-} else {
-	w.Write([]byte(`{"success": 0, "error":"Email is same"}`))
-}
-	}
-} else {
-	w.Write([]byte(`{"success": 0, "error":"Email is same"}`))
-}
+						} else {
+							w.Write([]byte(`{"success": 0, "error":"Email is same"}`))
+						}
+					}
+				} else {
+					w.Write([]byte(`{"success": 0, "error":"Email is same"}`))
+				}
 
-} else {
-	w.Write([]byte(`{"success": 0, "error":"Wrong Request"}`))
-}
+			} else {
+				w.Write([]byte(`{"success": 0, "error":"Wrong Request"}`))
+			}
 
-} else {
-		w.Write([]byte(`{"success": 0, "error":"Wrong Request"}`))
-}
+		} else {
+			w.Write([]byte(`{"success": 0, "error":"Wrong Request"}`))
+		}
 
 	} else {
 		w.Write([]byte(`{"success": 0, "error":"Unautorisated person"}`))
 	}
 }
-
-
 
 func ReqNewEmail(w http.ResponseWriter, r *http.Request) {
 	//1. Check IsSession
@@ -251,28 +248,28 @@ func ReqNewEmail(w http.ResponseWriter, r *http.Request) {
 				sf.SetErrorLog(err.Error())
 			}
 		}
-if user.Mail_Confirmed == 1 {
-	w.Write([]byte(`{"success": 0, "error":"Error request"}`))
-} else {
+		if user.Mail_Confirmed == 1 {
+			w.Write([]byte(`{"success": 0, "error":"Error request"}`))
+		} else {
 
-	mailsendt, _ := strconv.Atoi(user.MailSent)
-	lg := int(time.Now().Unix())
-	tm := lg - mailsendt
+			mailsendt, _ := strconv.Atoi(user.MailSent)
+			lg := int(time.Now().Unix())
+			tm := lg - mailsendt
 
-	if tm < 900 {
-		w.Write([]byte(`{"success": 0, "error":"Error request"}`))
-	} else {
-//Delete all hash data about this mail
-condition := "mail = '" + user.Mail + "'"
-vm := sf.CountRows("*", "timehash", condition)
-if vm != 0 {
-	sf.DeleteRow("timehash", condition)
-}
-//4. Send email
-		SendConfirmationEmail(user.Mail, user.Name)
-		w.Write([]byte(`{"success": 1, "answer":"The Confirmation email was sent"}`))
-	}
-}
+			if tm < 900 {
+				w.Write([]byte(`{"success": 0, "error":"Error request"}`))
+			} else {
+				//Delete all hash data about this mail
+				condition := "mail = '" + user.Mail + "'"
+				vm := sf.CountRows("*", "timehash", condition)
+				if vm != 0 {
+					sf.DeleteRow("timehash", condition)
+				}
+				//4. Send email
+				SendConfirmationEmail(user.Mail, user.Name)
+				w.Write([]byte(`{"success": 1, "answer":"The Confirmation email was sent"}`))
+			}
+		}
 	} else {
 		w.Write([]byte(`{"success": 0, "error":"Unautorisated person"}`))
 	}
@@ -308,22 +305,21 @@ func FP(w http.ResponseWriter, r *http.Request) {
 					}
 				}
 
-				nowtime :=  time.Now().Unix()
-				 if u.Deadline > int(nowtime) {
-				//show page
-				var data = HTMLData{}
-				data.HeaderToHTML("Create new Password") //Title
-				data.MenuToHTML(false, false)            //Menu
-				var bd = []string{"Create new Password", hashm}
-				data.BodyToHTML(bd) //Content
-				data.ShowPage(w, r, "restore_pass.html")
-			} else {
-				var s = HTMLData{}
-				s.MenuToHTML(false, false) //Menu
-				answer = "E3"
-				s.ServicePage(answer, w, r)
-			}
-
+				nowtime := time.Now().Unix()
+				if u.Deadline > int(nowtime) {
+					//show page
+					var data = HTMLData{}
+					data.HeaderToHTML("Create new Password") //Title
+					data.MenuToHTML(false, false)            //Menu
+					var bd = []string{"Create new Password", hashm}
+					data.BodyToHTML(bd) //Content
+					data.ShowPage(w, r, "restore_pass.html")
+				} else {
+					var s = HTMLData{}
+					s.MenuToHTML(false, false) //Menu
+					answer = "E3"
+					s.ServicePage(answer, w, r)
+				}
 
 			} else {
 				var s = HTMLData{}
@@ -408,103 +404,101 @@ func ConfirmEmail(w http.ResponseWriter, r *http.Request) {
 	var answer string
 	p := bluemonday.UGCPolicy()
 	hash, err := r.URL.Query()["token"]
-	if err  {
-	  sf.SetErrorLog("No GET['token']")
+	if err {
+		sf.SetErrorLog("No GET['token']")
 	}
 	hashm := p.Sanitize(hash[0])
 
-if !err || len(hashm) > 1 {
+	if !err || len(hashm) > 1 {
 
-	//Check hash
-	condition := "hash = '" + hashm + "'"
-	v := sf.CountRows("*", "timehash", condition)
+		//Check hash
+		condition := "hash = '" + hashm + "'"
+		v := sf.CountRows("*", "timehash", condition)
 
-if v != 0 {
+		if v != 0 {
 
-	//Check hashtime
-	ans := sf.SelectFrom("deadline", "timehash", condition)
-	var u TimeHash
-	for ans.Next() {
+			//Check hashtime
+			ans := sf.SelectFrom("deadline", "timehash", condition)
+			var u TimeHash
+			for ans.Next() {
 
-		err := ans.StructScan(&u)
-		if err != nil {
+				err := ans.StructScan(&u)
+				if err != nil {
 
-			sf.SetErrorLog(err.Error())
-		}
-	}
-
-	nowtime :=  time.Now().Unix()
-
-	if u.Deadline > int(nowtime) {
-
-		//1. Get email daress from DB
-		sqldata := sf.SelectFrom("mail, name", "timehash", condition)
-		var m TimeHash
-		for sqldata.Next() {
-
-			err := sqldata.StructScan(&m)
-			if err != nil {
-
-				sf.SetErrorLog(err.Error())
+					sf.SetErrorLog(err.Error())
+				}
 			}
-		}
-		//mail = m.Mail
 
-		//1.2 //Check if email is mismath
-		cv := "`name` = '" + m.Name + "'"
-		sq := sf.SelectFrom("mail, name", "users", cv)
-		var u UsersTable
-		for sq.Next() {
+			nowtime := time.Now().Unix()
 
-			err := sq.StructScan(&u)
-			if err != nil {
+			if u.Deadline > int(nowtime) {
 
-				sf.SetErrorLog(err.Error())
+				//1. Get email daress from DB
+				sqldata := sf.SelectFrom("mail, name", "timehash", condition)
+				var m TimeHash
+				for sqldata.Next() {
+
+					err := sqldata.StructScan(&m)
+					if err != nil {
+
+						sf.SetErrorLog(err.Error())
+					}
+				}
+				//mail = m.Mail
+
+				//1.2 //Check if email is mismath
+				cv := "`name` = '" + m.Name + "'"
+				sq := sf.SelectFrom("mail, name", "users", cv)
+				var u UsersTable
+				for sq.Next() {
+
+					err := sq.StructScan(&u)
+					if err != nil {
+
+						sf.SetErrorLog(err.Error())
+					}
+				}
+
+				if u.Mail != m.Mail {
+					// User want to change his email
+					//2. Update that email confirmed in table users
+					cond := "`name` = '" + m.Name + "'"
+					updatedData := [][]string{
+						{"`mail_confirmed`", "'1'"},
+						{"`mail`", "'" + m.Mail + "'"},
+					}
+
+					sf.UpdateRow("users", updatedData, cond)
+
+					sf.DeleteRow("timehash", cond)
+
+					//4. Return sucsess data
+					answer = "A1"
+
+				} else {
+
+					//2. Update that email confirmed in table users
+					cond := "mail = '" + m.Mail + "'"
+					updatedData := [][]string{
+						{"mail_confirmed", "1"},
+					}
+
+					sf.UpdateRow("users", updatedData, cond)
+					//3. Delete hash from timehash table
+					sf.DeleteRow("timehash", condition)
+					//4. Return sucsess data
+					answer = "Email confirmed"
+				}
+			} else {
+				answer = "E3"
 			}
-		}
-
-		if u.Mail != m.Mail {
-// User want to change his email
-//2. Update that email confirmed in table users
-cond := "`name` = '" + m.Name + "'"
-updatedData := [][]string{
-	{"`mail_confirmed`", "'1'"},
-	{"`mail`", "'" + m.Mail + "'"},
-}
-
-sf.UpdateRow("users", updatedData, cond)
-
-	sf.DeleteRow("timehash", cond)
-
-//4. Return sucsess data
-answer = "A1"
-
 		} else {
-
-		//2. Update that email confirmed in table users
-		cond := "mail = '" + m.Mail + "'"
-		updatedData := [][]string{
-			{"mail_confirmed", "1"},
+			answer = "Wrong Link"
 		}
 
-		sf.UpdateRow("users", updatedData, cond)
-		//3. Delete hash from timehash table
-		sf.DeleteRow("timehash", condition)
-		//4. Return sucsess data
-		answer = "Email confirmed"
-}
 	} else {
-		answer = "E3"
+		answer = "Wrong Link"
 	}
-} else {
-	  answer = "Wrong Link"
-}
-
-
-} else {
-	answer = "Wrong Link"
-}
-
 
 	var s = HTMLData{}
 	s.MenuToHTML(sf.IsSession(r, ""), sf.IsSession(r, "admin_token")) //Menu

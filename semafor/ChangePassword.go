@@ -21,11 +21,10 @@ import (
 	"net/http"
 )
 
-
-func  ChangePassword (w http.ResponseWriter, r *http.Request) {
+func ChangePassword(w http.ResponseWriter, r *http.Request) {
 
 	//Check for session
-	var session, _= sf.CheckSession(r, "")
+	var session, _ = sf.CheckSession(r, "")
 
 	if session != true {
 		//Unautorisated person
@@ -34,20 +33,18 @@ func  ChangePassword (w http.ResponseWriter, r *http.Request) {
 	} else {
 		//Autorisated person
 
-			//update cookie. Need to set time for update. Now it is updated evry time
-			sf.UpdateSession(w, r, "session_token")
+		//update cookie. Need to set time for update. Now it is updated evry time
+		sf.UpdateSession(w, r, "session_token")
 
-			var data = HTMLData{}
-			data.HeaderToHTML("Change Password") //Title
-			data.MenuToHTML(true, sf.IsSession(r, "admin_token"))      //Menu
-			jsfiles := []string{"query.js",}
-			data.JstoHtml(jsfiles)
+		var data = HTMLData{}
+		data.HeaderToHTML("Change Password")                  //Title
+		data.MenuToHTML(true, sf.IsSession(r, "admin_token")) //Menu
+		jsfiles := []string{"query.js"}
+		data.JstoHtml(jsfiles)
 
-			var bd = []string{"Change Password"}
-			data.BodyToHTML(bd) //Content
-			data.ShowPage(w, r, "change_password.html")
-
-
+		var bd = []string{"Change Password"}
+		data.BodyToHTML(bd) //Content
+		data.ShowPage(w, r, "change_password.html")
 
 	}
 

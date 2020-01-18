@@ -20,49 +20,47 @@ import (
 	"net/http"
 )
 
-
-func ParamMaintenance (w http.ResponseWriter, r *http.Request) {
-//Switch On / Off Maintenance Mode
-  var m bool = CheckMaintenanceMode()
-  if !m  {
-    // put to maintenance
-    ToMaintenance()
-    //Send answer
-    w.Write([]byte(`{"success": 1, "answer":{"status": "In Maintenance", "style":"red", "button":"Switch off Maintenance mode"}}`))
-  } else {
-    //make alive
-    MakeAlive()
-    //Send answer
-      w.Write([]byte(`{"success": 1, "answer":{"status": "Site active", "style":"green", "button":"Switch on Maintenance mode"}}`))
-  }
+func ParamMaintenance(w http.ResponseWriter, r *http.Request) {
+	//Switch On / Off Maintenance Mode
+	var m bool = CheckMaintenanceMode()
+	if !m {
+		// put to maintenance
+		ToMaintenance()
+		//Send answer
+		w.Write([]byte(`{"success": 1, "answer":{"status": "In Maintenance", "style":"red", "button":"Switch off Maintenance mode"}}`))
+	} else {
+		//make alive
+		MakeAlive()
+		//Send answer
+		w.Write([]byte(`{"success": 1, "answer":{"status": "Site active", "style":"green", "button":"Switch on Maintenance mode"}}`))
+	}
 }
 
-
-func RegStatus (w http.ResponseWriter, r *http.Request) {
-//Switch On / Off user registration
-  var m bool = CheckRegistration()
-  if m {
-    //Forbid registration
-    ForbidRegistration()
-    w.Write([]byte(`{"success": 1, "answer":{"status": "Forbiden", "style":"red", "button":"Allow User Registration"}}`))
-  } else {
-    //Allow registration
-    AllowRegistration()
-    w.Write([]byte(`{"success": 1, "answer":{"status": "Allow", "style":"green", "button":"Forbid User Registration"}}`))
-  }
+func RegStatus(w http.ResponseWriter, r *http.Request) {
+	//Switch On / Off user registration
+	var m bool = CheckRegistration()
+	if m {
+		//Forbid registration
+		ForbidRegistration()
+		w.Write([]byte(`{"success": 1, "answer":{"status": "Forbiden", "style":"red", "button":"Allow User Registration"}}`))
+	} else {
+		//Allow registration
+		AllowRegistration()
+		w.Write([]byte(`{"success": 1, "answer":{"status": "Allow", "style":"green", "button":"Forbid User Registration"}}`))
+	}
 }
 
-func EmailCheck (w http.ResponseWriter, r *http.Request) {
-  //Switch On / Off email confirmatio
-  var m bool = CheckMailConfStatus()
+func EmailCheck(w http.ResponseWriter, r *http.Request) {
+	//Switch On / Off email confirmatio
+	var m bool = CheckMailConfStatus()
 
-  if m {
-    //Switch  Off email confirmation
-    OffMailConfirmation()
-    w.Write([]byte(`{"success": 1, "answer":{"status": "Off", "style":"red", "button":"Switch on Email Confirmation"}}`))
-  } else {
-    //Switch  On email confirmation
-    OnMailConfirmation()
-    w.Write([]byte(`{"success": 1, "answer":{"status": "On", "style":"green", "button":"Switch off Email Confirmation"}}`))
-  }
+	if m {
+		//Switch  Off email confirmation
+		OffMailConfirmation()
+		w.Write([]byte(`{"success": 1, "answer":{"status": "Off", "style":"red", "button":"Switch on Email Confirmation"}}`))
+	} else {
+		//Switch  On email confirmation
+		OnMailConfirmation()
+		w.Write([]byte(`{"success": 1, "answer":{"status": "On", "style":"green", "button":"Switch off Email Confirmation"}}`))
+	}
 }

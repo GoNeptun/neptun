@@ -18,16 +18,16 @@ package semafor
 
 import (
 	sf "../system_functions"
-	"net/http"
 	"html/template"
+	"net/http"
 )
 
 func (s *HTMLData) ServicePage(name string, w http.ResponseWriter, r *http.Request) {
 
 	if name == "404" {
 		s.HeaderToHTML("Error 404")
-		var bd = [] template.HTML{"Error 404. Page Not Found"}
-			s.HTMLBodyToHTML(bd)
+		var bd = []template.HTML{"Error 404. Page Not Found"}
+		s.HTMLBodyToHTML(bd)
 	}
 
 	if name == "401" {
@@ -62,7 +62,7 @@ func (s *HTMLData) ServicePage(name string, w http.ResponseWriter, r *http.Reque
 
 	if name == "E3" {
 		s.HeaderToHTML("Hash time if over")
-		var bd = [] template.HTML {"Hash time if over. Please request a new link"}
+		var bd = []template.HTML{"Hash time if over. Please request a new link"}
 		s.HTMLBodyToHTML(bd)
 	}
 
@@ -70,7 +70,7 @@ func (s *HTMLData) ServicePage(name string, w http.ResponseWriter, r *http.Reque
 		//Email not confirmed and confirmation link was sent less
 		//then 15 minutes ago
 		s.HeaderToHTML("Email not confirmed")
-		var bd = [] template.HTML {"Email not confirmed."," Please check your email for confirmation link. You can request new confirmation email in 15 minutes"}
+		var bd = []template.HTML{"Email not confirmed.", " Please check your email for confirmation link. You can request new confirmation email in 15 minutes"}
 		s.HTMLBodyToHTML(bd)
 	}
 
@@ -78,16 +78,16 @@ func (s *HTMLData) ServicePage(name string, w http.ResponseWriter, r *http.Reque
 		//Email not confirmed and confirmation link was sent less
 		//then 15 minutes ago
 		s.HeaderToHTML("Email successfully changed")
-		var bd = [] template.HTML {"Email successfully changed."}
+		var bd = []template.HTML{"Email successfully changed."}
 		s.HTMLBodyToHTML(bd)
 	}
 	if name == "E2" {
 		//Email not confirmed and confirmation link was sent less
 		//then 15 minutes ago
 		s.HeaderToHTML("Email not confirmed")
-		var bd = [] template.HTML{"Email not confirmed.","Please check your email for confirmation link or <span id='reqnewemail' style='cursor:pointer; text-decoration: underline;'>request a new email</span>" }
+		var bd = []template.HTML{"Email not confirmed.", "Please check your email for confirmation link or <span id='reqnewemail' style='cursor:pointer; text-decoration: underline;'>request a new email</span>"}
 		s.HTMLBodyToHTML(bd)
-		jsfiles := []string{"query.js",}
+		jsfiles := []string{"query.js"}
 		s.JstoHtml(jsfiles)
 	}
 
@@ -103,7 +103,6 @@ func (s *HTMLData) ServicePage(name string, w http.ResponseWriter, r *http.Reque
 		s.BodyToHTML(bd)
 	}
 	s.ShowPage(w, r, "service")
-
 
 }
 

@@ -20,7 +20,6 @@ import (
 	"net/http"
 )
 
-
 func Maintenance(w http.ResponseWriter, r *http.Request) {
 
 	var data = HTMLData{}

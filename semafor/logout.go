@@ -19,7 +19,6 @@ package semafor
 import (
 	sf "../system_functions"
 	"net/http"
-
 )
 
 func LogOut(w http.ResponseWriter, r *http.Request) {

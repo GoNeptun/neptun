@@ -18,37 +18,34 @@ package system_functions
 
 import (
 	viper "github.com/spf13/viper"
-
-
 )
 
 type Params map[string]interface{}
 type Menus map[string]interface{}
 type Data map[string]interface{}
 
-func GetSS (lg string, param string) string {
+func GetSS(lg string, param string) string {
 	n := GetSiteSettingsPath()
 	y := viper.New()
- y.SetConfigName(n[1]) // name of config file (without extension)
- y.AddConfigPath(n[0])
- err := y.ReadInConfig() // Find and read the config file
- if err != nil {             // Handle errors reading the config file
-
-	 SetErrorLog("Please Check config file. It is an error in it...")
- }
-
-
- var sfg string = y.GetString(param)
- return sfg
-}
-
-func ParamsConfig (lg string) Params {
-	n := GetSiteSettingsPath()
- y := viper.New()
 	y.SetConfigName(n[1]) // name of config file (without extension)
 	y.AddConfigPath(n[0])
 	err := y.ReadInConfig() // Find and read the config file
-	if err != nil {             // Handle errors reading the config file
+	if err != nil {         // Handle errors reading the config file
+
+		SetErrorLog("Please Check config file. It is an error in it...")
+	}
+
+	var sfg string = y.GetString(param)
+	return sfg
+}
+
+func ParamsConfig(lg string) Params {
+	n := GetSiteSettingsPath()
+	y := viper.New()
+	y.SetConfigName(n[1]) // name of config file (without extension)
+	y.AddConfigPath(n[0])
+	err := y.ReadInConfig() // Find and read the config file
+	if err != nil {         // Handle errors reading the config file
 
 		SetErrorLog("Please Check config file. It is an error in it...")
 	}
@@ -56,36 +53,36 @@ func ParamsConfig (lg string) Params {
 	var sfg Params
 	check := y.IsSet("params")
 	if check {
-prod := y.Sub("params")
-	err = prod.Unmarshal(&sfg)
-	if err != nil {             // Handle errors reading the config file
+		prod := y.Sub("params")
+		err = prod.Unmarshal(&sfg)
+		if err != nil { // Handle errors reading the config file
 
-		SetErrorLog(err.Error())
+			SetErrorLog(err.Error())
+		}
 	}
-}
-//fmt.Printf(sfg["description"].(string))
-//Add Languages
-lang := "Languages." + lg
-check = y.IsSet(lang)
-if check {
-k := y.Sub(lang)
-err = k.Unmarshal(&sfg)
-if err != nil {             // Handle errors reading the config file
+	//fmt.Printf(sfg["description"].(string))
+	//Add Languages
+	lang := "Languages." + lg
+	check = y.IsSet(lang)
+	if check {
+		k := y.Sub(lang)
+		err = k.Unmarshal(&sfg)
+		if err != nil { // Handle errors reading the config file
 
-	SetErrorLog(err.Error())
-}
-}
-return sfg
+			SetErrorLog(err.Error())
+		}
+	}
+	return sfg
 
 }
 
-func MenusConfig (lg string) Menus {
+func MenusConfig(lg string) Menus {
 	n := GetSiteSettingsPath()
 	y := viper.New()
 	y.SetConfigName(n[1]) // name of config file (without extension)
 	y.AddConfigPath(n[0])
 	err := y.ReadInConfig() // Find and read the config file
-	if err != nil {             // Handle errors reading the config file
+	if err != nil {         // Handle errors reading the config file
 
 		SetErrorLog("Please Check config file. It is an error in it...")
 	}
@@ -94,28 +91,28 @@ func MenusConfig (lg string) Menus {
 
 	check := y.IsSet("menu")
 	if check {
-prod := y.Sub("menu")
-	err = prod.Unmarshal(&sfg)
-	if err != nil {             // Handle errors reading the config file
+		prod := y.Sub("menu")
+		err = prod.Unmarshal(&sfg)
+		if err != nil { // Handle errors reading the config file
 
-		SetErrorLog(err.Error())
+			SetErrorLog(err.Error())
+		}
 	}
-}
-//fmt.Printf(sfg["description"].(string))
-//Add Languages
+	//fmt.Printf(sfg["description"].(string))
+	//Add Languages
 
-lang := "Languages." + lg + ".menu"
-check = y.IsSet(lang)
-if check {
-k := y.Sub(lang)
-err = k.Unmarshal(&sfg)
-if err != nil {             // Handle errors reading the config file
+	lang := "Languages." + lg + ".menu"
+	check = y.IsSet(lang)
+	if check {
+		k := y.Sub(lang)
+		err = k.Unmarshal(&sfg)
+		if err != nil { // Handle errors reading the config file
 
-	SetErrorLog(err.Error())
-}
-}
-//fmt.Printf(sfg["postpend"].(string))
+			SetErrorLog(err.Error())
+		}
+	}
+	//fmt.Printf(sfg["postpend"].(string))
 
-return sfg
+	return sfg
 
 }

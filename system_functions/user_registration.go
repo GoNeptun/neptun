@@ -21,7 +21,6 @@ import (
 	"strconv"
 )
 
-
 func UpdateRegDataFromtDB(Value string) {
 	updatedData := [][]string{
 		{"registration", Value},

@@ -17,11 +17,12 @@
 package semafor
 
 import (
-	"path"
 	sf "../system_functions"
+	"path"
 )
+
 var mainpage = "main.html"
 var service = "service.html"
-var xheader = path.Join(sf.LoadContentDirectory() + "layouts/partials/", "header.html")
-var xmenu = path.Join(sf.LoadContentDirectory() + "layouts/partials/", "nav.html")
-var xfooter = path.Join(sf.LoadContentDirectory() + "layouts/partials/", "footer.html")
+var xheader = path.Join(sf.LoadContentDirectory()+"layouts/partials/", "header.html")
+var xmenu = path.Join(sf.LoadContentDirectory()+"layouts/partials/", "nav.html")
+var xfooter = path.Join(sf.LoadContentDirectory()+"layouts/partials/", "footer.html")

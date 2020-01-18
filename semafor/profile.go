@@ -23,7 +23,7 @@ import (
 	"time"
 )
 
-func Profile (w http.ResponseWriter, r *http.Request) {
+func Profile(w http.ResponseWriter, r *http.Request) {
 
 	//Check for session
 	var session, uname = sf.CheckSession(r, "")
@@ -35,37 +35,34 @@ func Profile (w http.ResponseWriter, r *http.Request) {
 	} else {
 		//Autorisated person
 
-			//update cookie. Need to set time for update. Now it is updated evry time
-			sf.UpdateSession(w, r, "session_token")
+		//update cookie. Need to set time for update. Now it is updated evry time
+		sf.UpdateSession(w, r, "session_token")
 
-			var data = HTMLData{}
-			data.HeaderToHTML("Profile") //Title
-			data.MenuToHTML(true, sf.IsSession(r, "admin_token"))      //Menu
+		var data = HTMLData{}
+		data.HeaderToHTML("Profile")                          //Title
+		data.MenuToHTML(true, sf.IsSession(r, "admin_token")) //Menu
 
+		//Create Content
+		var a UsersTable
+		n := "`name` = '" + uname + "'"
+		SqlAnswer := sf.SelectFrom("mail, created, login", "users", n)
+		for SqlAnswer.Next() {
 
-			//Create Content
-			var a UsersTable
-			n := "`name` = '" + uname + "'"
-			SqlAnswer := sf.SelectFrom("mail, created, login", "users", n)
-			for SqlAnswer.Next() {
+			err := SqlAnswer.StructScan(&a)
+			if err != nil {
 
-				err := SqlAnswer.StructScan(&a)
-				if err != nil {
-
-					sf.SetErrorLog(err.Error())
-				}
+				sf.SetErrorLog(err.Error())
 			}
+		}
 
-			jointime, _ := strconv.ParseInt(a.Created, 10, 64)
-			logintime, _ := strconv.ParseInt(a.Login, 10, 64)
-			jt := time.Unix(jointime, 0).Format("02 January 2006")
-			lt := time.Unix(logintime, 0).Format("02 January 2006 15:04:05")
+		jointime, _ := strconv.ParseInt(a.Created, 10, 64)
+		logintime, _ := strconv.ParseInt(a.Login, 10, 64)
+		jt := time.Unix(jointime, 0).Format("02 January 2006")
+		lt := time.Unix(logintime, 0).Format("02 January 2006 15:04:05")
 
-			var bd = []string{"Profile", uname, string(jt), string(lt), a.Mail,}
-			data.BodyToHTML(bd) //Content
-			data.ShowPage(w, r, "profile.html")
-
-
+		var bd = []string{"Profile", uname, string(jt), string(lt), a.Mail}
+		data.BodyToHTML(bd) //Content
+		data.ShowPage(w, r, "profile.html")
 
 	}
 

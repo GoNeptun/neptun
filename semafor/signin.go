@@ -154,7 +154,6 @@ func Signin(w http.ResponseWriter, r *http.Request) {
 
 					//get login timestamp
 
-
 					http.Redirect(w, r, "/", http.StatusFound)
 
 				} else {
@@ -172,7 +171,7 @@ func Signin(w http.ResponseWriter, r *http.Request) {
 
 }
 
-func PreEmailNotVery (w http.ResponseWriter, r *http.Request, uname string ) {
+func PreEmailNotVery(w http.ResponseWriter, r *http.Request, uname string) {
 	n := "`name` = '" + uname + "'"
 	SqlAnswer := sf.SelectFrom("mailsent", "users", n)
 	var user UsersTable
@@ -184,11 +183,11 @@ func PreEmailNotVery (w http.ResponseWriter, r *http.Request, uname string ) {
 			sf.SetErrorLog(err.Error())
 		}
 	}
-EmailNotVery(w, r, user.MailSent)
+	EmailNotVery(w, r, user.MailSent)
 
 }
 
-func EmailNotVery (w http.ResponseWriter, r *http.Request, mailsend string ) {
+func EmailNotVery(w http.ResponseWriter, r *http.Request, mailsend string) {
 
 	mailsendt, _ := strconv.Atoi(mailsend)
 	lg := int(time.Now().Unix())
@@ -200,7 +199,6 @@ func EmailNotVery (w http.ResponseWriter, r *http.Request, mailsend string ) {
 
 		answer = "E2"
 	}
-
 
 	var s = HTMLData{}
 	s.MenuToHTML(true, false)

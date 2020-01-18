@@ -34,7 +34,6 @@ type RequestStruct struct {
 	Method string
 }
 
-
 func InsertIntoDB() {
 	//Insert Row
 	name := []string{"name", "age"}
@@ -93,9 +92,6 @@ func Semafor(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(k.Method)
 	w.Write([]byte(`{"error":"success"}`))
 }
-
-
-
 
 /*
 //Simple request

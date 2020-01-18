@@ -173,13 +173,13 @@ func LoadConfig(conf string) []string {
 
 }
 
-func GetCustomCSS() [] string {
+func GetCustomCSS() []string {
 	n := GetSiteSettingsPath()
 	y := viper.New()
- y.SetConfigName(n[1]) // name of config file (without extension)
- y.AddConfigPath(n[0])
+	y.SetConfigName(n[1]) // name of config file (without extension)
+	y.AddConfigPath(n[0])
 	err := y.ReadInConfig() // Find and read the config file
-	if err != nil {             // Handle errors reading the config file
+	if err != nil {         // Handle errors reading the config file
 
 		SetErrorLog("Please Check config file. It is an error in it...")
 	}
@@ -187,13 +187,13 @@ func GetCustomCSS() [] string {
 	return custom_css
 }
 
-func GetCustomJS() [] string {
+func GetCustomJS() []string {
 	n := GetSiteSettingsPath()
 	y := viper.New()
- y.SetConfigName(n[1]) // name of config file (without extension)
- y.AddConfigPath(n[0])
+	y.SetConfigName(n[1]) // name of config file (without extension)
+	y.AddConfigPath(n[0])
 	err := y.ReadInConfig() // Find and read the config file
-	if err != nil {             // Handle errors reading the config file
+	if err != nil {         // Handle errors reading the config file
 
 		SetErrorLog("Please Check config file. It is an error in it...")
 	}
@@ -204,10 +204,10 @@ func GetCustomJS() [] string {
 func GetDisableFonts() bool {
 	n := GetSiteSettingsPath()
 	y := viper.New()
- y.SetConfigName(n[1]) // name of config file (without extension)
- y.AddConfigPath(n[0])
+	y.SetConfigName(n[1]) // name of config file (without extension)
+	y.AddConfigPath(n[0])
 	err := y.ReadInConfig() // Find and read the config file
-	if err != nil {             // Handle errors reading the config file
+	if err != nil {         // Handle errors reading the config file
 
 		SetErrorLog("Please Check config file. It is an error in it...")
 	}

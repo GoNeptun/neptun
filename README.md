@@ -2,6 +2,7 @@
 A Fast Dynamic Content Framework (DCF) for building websites written in Go by [sucsessyan] (https://github.com/sucsessyan)
 
 [![Build Status](https://travis-ci.com/goneptun/neptun.png)](https://travis-ci.com/goneptun/neptun)
+[![Go Report Card](https://goreportcard.com/badge/github.com/goneptun/neptun)](https://goreportcard.com/report/github.com/goneptun/neptun)
 
 ## Overview
 

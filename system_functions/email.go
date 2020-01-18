@@ -93,8 +93,8 @@ func SendEmailNow(to string, uname string, link string, subject string, template
 		Name: uname,
 		URL:  link,
 	}
-n := LoadContentDirectory ()
-templateDir := n + "layouts/template/email/"
+	n := LoadContentDirectory()
+	templateDir := n + "layouts/template/email/"
 	var emailtemplate = path.Join(templateDir, template)
 	r := NewRequest([]string{to}, subject, "")
 

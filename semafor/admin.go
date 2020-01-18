@@ -48,63 +48,63 @@ func Admin(w http.ResponseWriter, r *http.Request) {
 			var data = HTMLData{}
 			data.HeaderToHTML("Admin Panel") //Title
 			data.MenuToHTML(true, true)      //Menu
-			jsfiles := []string{"admin.js",}
+			jsfiles := []string{"admin.js"}
 			data.JstoHtml(jsfiles)
 
-//1. Count Users
-condition := "`id` > '1'"
-userCount := sf.CountRows("*", "users", condition)
+			//1. Count Users
+			condition := "`id` > '1'"
+			userCount := sf.CountRows("*", "users", condition)
 
-//2. Check Site-Settings: Maintenance mode, User Registrations,  Email Confirmations
-n := "`id` = '1'"
-SqlAnswer := sf.SelectFrom("*", "site_settings", n)
-var ss SiteSettingsTable
-for SqlAnswer.Next() {
+			//2. Check Site-Settings: Maintenance mode, User Registrations,  Email Confirmations
+			n := "`id` = '1'"
+			SqlAnswer := sf.SelectFrom("*", "site_settings", n)
+			var ss SiteSettingsTable
+			for SqlAnswer.Next() {
 
-	err := SqlAnswer.StructScan(&ss)
-	if err != nil {
+				err := SqlAnswer.StructScan(&ss)
+				if err != nil {
 
-		sf.SetErrorLog(err.Error())
-	}
-}
-var Mm string
-var MmM string
-var MmMc string
-if ss.Maintenance == 0 {
-	Mm = "Site active"
-	MmM = "Switch on Maintenance mode"
-	MmMc = "color:green"
-} else {
-	Mm = "Site in Maintenance"
-	MmM = "Switch of Maintenance mode"
-	MmMc = "color:red"
-}
+					sf.SetErrorLog(err.Error())
+				}
+			}
+			var Mm string
+			var MmM string
+			var MmMc string
+			if ss.Maintenance == 0 {
+				Mm = "Site active"
+				MmM = "Switch on Maintenance mode"
+				MmMc = "color:green"
+			} else {
+				Mm = "Site in Maintenance"
+				MmM = "Switch of Maintenance mode"
+				MmMc = "color:red"
+			}
 
-var Rm string
-var RmM string
-var Rmc string
-if ss.Registration != 0 {
-	Rm = "Allow"
-	RmM = "Forbid registration"
-	Rmc = "color:green"
-} else {
-	Rm = "Forbiden"
-	RmM = "Allow registration"
-	Rmc = "color:red"
-}
+			var Rm string
+			var RmM string
+			var Rmc string
+			if ss.Registration != 0 {
+				Rm = "Allow"
+				RmM = "Forbid registration"
+				Rmc = "color:green"
+			} else {
+				Rm = "Forbiden"
+				RmM = "Allow registration"
+				Rmc = "color:red"
+			}
 
-var Mc string
-var McM string
-var McMc string
-if ss.MailConfirmation != 0 {
-	Mc = "On"
-	McM = "Switch Off Email Confirmation"
-	McMc = "color:green"
-} else {
-	Mc = "Off"
-	McM = "Switch On Email Confirmation"
-	McMc = "color:red"
-}
+			var Mc string
+			var McM string
+			var McMc string
+			if ss.MailConfirmation != 0 {
+				Mc = "On"
+				McM = "Switch Off Email Confirmation"
+				McMc = "color:green"
+			} else {
+				Mc = "Off"
+				McM = "Switch On Email Confirmation"
+				McMc = "color:red"
+			}
 
 			var bd = []string{"Admin Panel", strconv.Itoa(userCount), Mm, MmM, MmMc, Rm, RmM, Rmc, Mc, McM, McMc}
 			data.BodyToHTML(bd) //Content

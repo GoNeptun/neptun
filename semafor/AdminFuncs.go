@@ -22,7 +22,6 @@ package semafor
 import (
 	sf "../system_functions"
 	"net/http"
-
 )
 
 func AdminFuncs(w http.ResponseWriter, r *http.Request) {
@@ -40,34 +39,34 @@ func AdminFuncs(w http.ResponseWriter, r *http.Request) {
 
 		if s != true {
 			// No rights for user
-				w.Write([]byte(`{"success": 0, "error":"No rights"}`))
+			w.Write([]byte(`{"success": 0, "error":"No rights"}`))
 
 		} else {
-switch r.Method {
-case "GET":
-	paramm, err := r.URL.Query()["param"]
-	param := paramm[0]
+			switch r.Method {
+			case "GET":
+				paramm, err := r.URL.Query()["param"]
+				param := paramm[0]
 
-	if !err || len(param) < 1 {
-		w.Write([]byte(`{"success": 0, "error":"Wrong request"}`))
+				if !err || len(param) < 1 {
+					w.Write([]byte(`{"success": 0, "error":"Wrong request"}`))
 
-	} else {
+				} else {
 
-	switch param {
-	case "maintenance":
-	sf.ParamMaintenance(w,r)
-case "emailcheck":
-	sf.EmailCheck(w,r)
-case "regstatus":
-	sf.RegStatus(w,r)
-default:
-		w.Write([]byte(`{"success": 0, "error":"Wrong request"}`))
-	}
-}
+					switch param {
+					case "maintenance":
+						sf.ParamMaintenance(w, r)
+					case "emailcheck":
+						sf.EmailCheck(w, r)
+					case "regstatus":
+						sf.RegStatus(w, r)
+					default:
+						w.Write([]byte(`{"success": 0, "error":"Wrong request"}`))
+					}
+				}
 
-case "POST":
-	w.Write([]byte(`{"success": 0, "error":"Wrong method"}`))
-}
-}
+			case "POST":
+				w.Write([]byte(`{"success": 0, "error":"Wrong method"}`))
+			}
+		}
 	}
 }

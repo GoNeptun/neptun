@@ -17,14 +17,13 @@
 package semafor
 
 import (
-	"html/template"
 	sf "../system_functions"
+	"html/template"
 )
 
 type error interface {
-    Error() string
+	Error() string
 }
-
 
 type SysData struct {
 	Title   string
@@ -34,30 +33,31 @@ type SysData struct {
 }
 
 type HTMLData struct {
-	Header  HeaderData
-	SysMsg  SysMsgData
-	Menu    MenuData
-	Page 	template.HTML
-	Content ContentData
-  HTMLContent HTMLContentData
-	Site SiteStruct
+	Header       HeaderData
+	SysMsg       SysMsgData
+	Menu         MenuData
+	Page         template.HTML
+	Content      ContentData
+	HTMLContent  HTMLContentData
+	Site         SiteStruct
 	IsTranslated bool
 }
 
 type SiteStruct struct {
 	LanguageCode string
-	Title string
-	BaseURL template.URL
-	Params sf.Params
-	Language Lang
-	Menus sf.Menus
-	Data sf.Data
-	Content template.HTML
+	Title        string
+	BaseURL      template.URL
+	Params       sf.Params
+	Language     Lang
+	Menus        sf.Menus
+	Data         sf.Data
+	Content      template.HTML
 }
 
 type Lang struct {
 	Lang string
 }
+
 //type Params map[string]interface{}
 /*
 type ParamsStruct struct {
@@ -70,14 +70,14 @@ type ParamsStruct struct {
 }
 */
 type HeaderData struct {
-	Done  bool
-  JS Jsdata
+	Done bool
+	JS   Jsdata
 	// CSS, JS string
 }
 
 type Jsdata struct {
-  Done bool
-  Body []string
+	Done bool
+	Body []string
 }
 
 type SysMsgData struct {
@@ -86,20 +86,20 @@ type SysMsgData struct {
 }
 
 type MenuData struct {
-	Done         bool
-	Login, Admin bool
+	Done           bool
+	Login, Admin   bool
 	IsRegistration bool
 }
 
 type ContentData struct {
-	Done bool
+	Done  bool
 	Title string
 	Body  []string
 }
 
 type HTMLContentData struct {
-	Done bool
-	Body  [] template.HTML
+	Done  bool
+	Body  []template.HTML
 	Title template.HTML
 }
 
@@ -118,7 +118,7 @@ type UsersTable struct {
 	Password       string `db:"pass"`
 	Mail           string `db:"mail"`
 	Mail_Confirmed int    `db:"mail_confirmed"`
-  MailSent      string `db:"mailsent"`
+	MailSent       string `db:"mailsent"`
 	Created        string `db:"created"`
 	Access         string `db:"access"`
 	Login          string `db:"login"`
@@ -127,16 +127,16 @@ type UsersTable struct {
 }
 
 type TimeHash struct {
-	Mail string `db:"mail"`
-	Name string `db:"name"`
-	Deadline int `db:"deadline"`
+	Mail     string `db:"mail"`
+	Name     string `db:"name"`
+	Deadline int    `db:"deadline"`
 }
 
 type SiteSettingsTable struct {
-  ID int `db:"id"`
-  Maintenance int `db:"maintenance"`
-  MailConfirmation int `db:"mail_confirmation"`
-  Registration int `db:"registration"`
+	ID               int `db:"id"`
+	Maintenance      int `db:"maintenance"`
+	MailConfirmation int `db:"mail_confirmation"`
+	Registration     int `db:"registration"`
 }
 
 type Roles struct {

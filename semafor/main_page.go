@@ -32,7 +32,6 @@ func IndexPage(w http.ResponseWriter, r *http.Request) {
 		//Check for session
 		var session, uname = sf.CheckSession(r, "")
 
-
 		if !session {
 			//Unautorisated person
 			var data = HTMLData{}
@@ -50,15 +49,15 @@ func IndexPage(w http.ResponseWriter, r *http.Request) {
 			if m {
 				//User confirm email or email confirmation disabled
 
-			//update cookie. Need to set time for update. Now it is updated evry time
-			sf.UpdateSession(w, r, "session_token")
+				//update cookie. Need to set time for update. Now it is updated evry time
+				sf.UpdateSession(w, r, "session_token")
 
-			var data = HTMLData{}
-			data.HeaderToHTML("Dashboard")                        //Title
-			data.MenuToHTML(true, sf.IsSession(r, "admin_token")) //Menu
-			var bd = []string{fmt.Sprintf("Dashboard of %s", uname)}
-			data.BodyToHTML(bd) //Content
-			data.ShowPage(w, r, "")
+				var data = HTMLData{}
+				data.HeaderToHTML("Dashboard")                        //Title
+				data.MenuToHTML(true, sf.IsSession(r, "admin_token")) //Menu
+				var bd = []string{fmt.Sprintf("Dashboard of %s", uname)}
+				data.BodyToHTML(bd) //Content
+				data.ShowPage(w, r, "")
 
 			} else {
 				//User  don't confirm email

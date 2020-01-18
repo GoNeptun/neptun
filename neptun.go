@@ -26,7 +26,7 @@ import (
 
 func main() {
 
-sf.CheckConfig()
+	sf.CheckConfig()
 
 	sf.SetLog("Neptun Starting")
 	sf.SetLog("Check config file...")

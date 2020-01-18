@@ -46,30 +46,30 @@ func faviconHandler(w http.ResponseWriter, r *http.Request) {
 	n := sf.LoadContentDirectory()
 	favicon := n + "static/img/favicon.ico"
 	if sf.FileExists(favicon) {
-	http.ServeFile(w, r, favicon)
-} else {
+		http.ServeFile(w, r, favicon)
+	} else {
 		http.Redirect(w, r, "/404/", http.StatusFound)
-}
+	}
 }
 
 func RobotsTXTHandler(w http.ResponseWriter, r *http.Request) {
-		n := sf.LoadContentDirectory()
+	n := sf.LoadContentDirectory()
 	robots := n + "layouts/robots.txt"
 	if sf.FileExists(robots) {
-	http.ServeFile(w, r, robots)
-} else {
+		http.ServeFile(w, r, robots)
+	} else {
 		w.Write([]byte("User-agent: * \nDisallow: / "))
-}
+	}
 }
 
 func SitemapHandler(w http.ResponseWriter, r *http.Request) {
-		n := sf.LoadContentDirectory()
+	n := sf.LoadContentDirectory()
 	sitemap := n + "static/sitemap.xml"
 	if sf.FileExists(sitemap) {
-	http.ServeFile(w, r, sitemap)
-} else {
+		http.ServeFile(w, r, sitemap)
+	} else {
 		http.Redirect(w, r, "/404/", http.StatusFound)
-}
+	}
 }
 
 func StartService(port string) {
@@ -82,18 +82,18 @@ func StartService(port string) {
 
 	//Site pages
 	//Open Pages
-n := sf.LoadContentDirectory()
-dir := n + "static/"
-cssdir := dir + "css/"
-imgdir := dir + "img/"
+	n := sf.LoadContentDirectory()
+	dir := n + "static/"
+	cssdir := dir + "css/"
+	imgdir := dir + "img/"
 	r := mux.NewRouter()
 	r.HandleFunc("/", s.IndexPage)
 	r.PathPrefix("/static").Handler(http.StripPrefix("/static",
 		http.FileServer(http.Dir(dir))))
-		r.PathPrefix("/css").Handler(http.StripPrefix("/css",
-			http.FileServer(http.Dir(cssdir))))
-				r.PathPrefix("/img").Handler(http.StripPrefix("/img",
-					http.FileServer(http.Dir(imgdir))))
+	r.PathPrefix("/css").Handler(http.StripPrefix("/css",
+		http.FileServer(http.Dir(cssdir))))
+	r.PathPrefix("/img").Handler(http.StripPrefix("/img",
+		http.FileServer(http.Dir(imgdir))))
 
 	r.NotFoundHandler = http.HandlerFunc(s.NotFoundAny)
 	http.Handle("/", r)
@@ -109,7 +109,7 @@ imgdir := dir + "img/"
 	http.HandleFunc("/user/", s.UserAPI)
 
 	//System
-  http.HandleFunc("/exit", ExitApp)
+	http.HandleFunc("/exit", ExitApp)
 	http.HandleFunc("/favicon.ico", faviconHandler)
 	http.HandleFunc("/robots.txt", RobotsTXTHandler)
 	http.HandleFunc("/sitemap.xml", SitemapHandler)

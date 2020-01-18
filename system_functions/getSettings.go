@@ -16,27 +16,26 @@
 
 package system_functions
 
-func LoadContentDirectory () string {
-  n :=  LoadConfig("server")
-  m :=  GetSS("en", "theme")
-r := n[4] + "themes/" + m + "/"
-return r
-
+func LoadContentDirectory() string {
+	n := LoadConfig("server")
+	m := GetSS("en", "theme")
+	r := n[4] + "themes/" + m + "/"
+	return r
 
 }
 
-func LoadTitle () string {
-  n :=  ParamsConfig("en")
-  return n["title"].(string)
+func LoadTitle() string {
+	n := ParamsConfig("en")
+	return n["title"].(string)
 }
 
-func BaseURL () string {
-    n :=  LoadConfig("server")
-    baseurl := n[2] + "/"
-    return baseurl
+func BaseURL() string {
+	n := LoadConfig("server")
+	baseurl := n[2] + "/"
+	return baseurl
 }
 
 func LangCode() string {
-  n :=  GetSS("en", "languageCode")
-  return n
+	n := GetSS("en", "languageCode")
+	return n
 }
