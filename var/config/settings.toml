@@ -1,6 +1,6 @@
 
 [database]
-  database_name = "neptun"
+  database_name = "exchange"
   host = "127.0.0.1"
   password = "$2a##Fch3lM2H5dZhjnWIsYqrPXKdHgc0RWtP6qJlJ60F3nk"
   port = "8889"

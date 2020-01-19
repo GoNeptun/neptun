@@ -18,7 +18,7 @@ package systemfunctions
 
 type SiteSettTable struct {
 	Maint     int `db:"maintenance"`
-	Mail_Conf int `db:"mail_confirmation"`
+	MailConf int `db:"mail_confirmation"`
 	Reg       int `db:"registration"`
 }
 

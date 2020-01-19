@@ -16,7 +16,7 @@
 
 package systemfunctions
 
-var config_name string = "settings"
-var config_path string = "var/config"
+var configname string = "settings"
+var configpath string = "var/config"
 
 var AesKey = []byte("H4fnCsMf4vbE60nK")

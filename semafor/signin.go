@@ -118,7 +118,7 @@ func Signin(w http.ResponseWriter, r *http.Request) {
 				if s {
 					//confirmation email is need
 					// Check does user confirmed his email
-					if user.Mail_Confirmed == 1 {
+					if user.MailConfirmed == 1 {
 						fk = true
 					} else {
 						fk = false

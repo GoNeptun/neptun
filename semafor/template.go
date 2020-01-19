@@ -159,7 +159,7 @@ func (data *HTMLData) ShowPage(w http.ResponseWriter, r *http.Request, page stri
 	data.ContentToData(r)
 	n := sf.LoadContentDirectory()
 
-	index_dir := n + "layouts/"
+	indexdir := n + "layouts/"
 
 	pg := ""
 	switch page {
@@ -171,7 +171,7 @@ func (data *HTMLData) ShowPage(w http.ResponseWriter, r *http.Request, page stri
 		pg = "index.html"
 	}
 
-	var index_page = path.Join(index_dir, pg)
+	var indexpage = path.Join(indexdir, pg)
 
 	//Check for registrtion
 	if !data.Menu.Login {
@@ -192,7 +192,7 @@ func (data *HTMLData) ShowPage(w http.ResponseWriter, r *http.Request, page stri
 		"relURL":      relURL,
 	}
 
-	zzz, err := ioutil.ReadFile(index_page) // just pass the file name
+	zzz, err := ioutil.ReadFile(indexpage) // just pass the file name
 	if err != nil {
 		sf.SetErrorLog(err.Error())
 	}

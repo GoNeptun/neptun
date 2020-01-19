@@ -63,7 +63,7 @@ func GetSiteSettings(param string) bool {
 
 	var l int
 	if param == "mail_confirmation" {
-		l = m.Mail_Conf
+		l = m.MailConf
 	}
 	if param == "maintenance" {
 		l = m.Maint

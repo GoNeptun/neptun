@@ -24,8 +24,8 @@ import (
 )
 
 func HashConfigPasswords() {
-	viper.SetConfigName(config_name) // name of config file (without extension)
-	viper.AddConfigPath(config_path)
+	viper.SetConfigName(configname) // name of config file (without extension)
+	viper.AddConfigPath(configpath)
 	err := viper.ReadInConfig() // Find and read the config file
 	if err != nil {             // Handle errors reading the config file
 
@@ -80,8 +80,8 @@ func DecryptConfigPasswords(pwd string) string {
 }
 
 func CheckConfig() {
-	viper.SetConfigName(config_name) // name of config file (without extension)
-	viper.AddConfigPath(config_path)
+	viper.SetConfigName(configname) // name of config file (without extension)
+	viper.AddConfigPath(configpath)
 	if err := viper.ReadInConfig(); err != nil {
 		if _, ok := err.(viper.ConfigFileNotFoundError); ok {
 			// Config file not found; ignore error if desired
@@ -107,8 +107,8 @@ func CheckConfig() {
 }
 
 func LoadConfig(conf string) []string {
-	viper.SetConfigName(config_name) // name of config file (without extension)
-	viper.AddConfigPath(config_path)
+	viper.SetConfigName(configname) // name of config file (without extension)
+	viper.AddConfigPath(configpath)
 	err := viper.ReadInConfig() // Find and read the config file
 	if err != nil {             // Handle errors reading the config file
 
@@ -122,13 +122,13 @@ func LoadConfig(conf string) []string {
 		if domain == "" {
 			domain = "http://" + ip + ":" + port
 		}
-		var logs_dir string = viper.Get("server.logs_dir").(string)
-		var content_dir string = viper.Get("server.content_dir").(string)
+		var logsdir string = viper.Get("server.logs_dir").(string)
+		var contentdir string = viper.Get("server.content_dir").(string)
 		//var theme string = viper.Get("server.theme").(string)
 		//var languageCode string = viper.Get("server.languageCode").(string)
 		//var title string = viper.Get("server.title").(string)
 		//var googleAnalytics string = viper.Get("server.googleAnalytics").(string)
-		s := []string{port, logs_dir, domain, ip, content_dir}
+		s := []string{port, logsdir, domain, ip, contentdir}
 		return s
 
 	case "database":
@@ -183,8 +183,8 @@ func GetCustomCSS() []string {
 
 		SetErrorLog("Please Check config file. It is an error in it...")
 	}
-	var custom_css []string = y.GetStringSlice("custom_css")
-	return custom_css
+	var customcss []string = y.GetStringSlice("custom_css")
+	return customcss
 }
 
 func GetCustomJS() []string {
@@ -197,8 +197,8 @@ func GetCustomJS() []string {
 
 		SetErrorLog("Please Check config file. It is an error in it...")
 	}
-	var custom_js []string = y.GetStringSlice("custom_js")
-	return custom_js
+	var customjs []string = y.GetStringSlice("custom_js")
+	return customjs
 }
 
 func GetDisableFonts() bool {
@@ -216,8 +216,8 @@ func GetDisableFonts() bool {
 }
 
 func GetSiteSettingsPath() []string {
-	viper.SetConfigName(config_name) // name of config file (without extension)
-	viper.AddConfigPath(config_path)
+	viper.SetConfigName(configname) // name of config file (without extension)
+	viper.AddConfigPath(configpath)
 	err := viper.ReadInConfig() // Find and read the config file
 	if err != nil {             // Handle errors reading the config file
 

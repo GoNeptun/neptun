@@ -248,7 +248,7 @@ func ReqNewEmail(w http.ResponseWriter, r *http.Request) {
 				sf.SetErrorLog(err.Error())
 			}
 		}
-		if user.Mail_Confirmed == 1 {
+		if user.MailConfirmed == 1 {
 			w.Write([]byte(`{"success": 0, "error":"Error request"}`))
 		} else {
 

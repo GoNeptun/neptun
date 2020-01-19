@@ -117,7 +117,7 @@ type UsersTable struct {
 	Name           string `db:"name"`
 	Password       string `db:"pass"`
 	Mail           string `db:"mail"`
-	Mail_Confirmed int    `db:"mail_confirmed"`
+	MailConfirmed int    `db:"mail_confirmed"`
 	MailSent       string `db:"mailsent"`
 	Created        string `db:"created"`
 	Access         string `db:"access"`
