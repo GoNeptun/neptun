@@ -17,7 +17,7 @@
 package semafor
 
 import (
-	sf "../system_functions"
+	sf "../SystemFunctions"
 	"github.com/microcosm-cc/bluemonday"
 	"golang.org/x/crypto/bcrypt"
 	"net/http"

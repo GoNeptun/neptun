@@ -14,40 +14,24 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package system_functions
+package SystemFunctions
 
 import (
-	"log"
-	"os"
+	"net/http"
+	"time"
 )
 
-func GetLogDir() string {
-	n := LoadConfig("server")
-	var logdir string = n[1]
-	return logdir
-}
-
-func SetLog(value string) {
-	p := "neptun.log"
-	WriteLog(value, p)
-}
-
-func SetErrorLog(value string) {
-	p := "error.neptun.log"
-	WriteLog(value, p)
-}
-
-func WriteLog(value string, p string) {
-	n := GetLogDir()
-	logdir := n + p
-	f, err := os.OpenFile(logdir,
-		os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
-	if err != nil {
-		log.Println(err)
+// addCookie will apply a new cookie to the response of a http
+// request, with the key/value this method is passed.
+func addCookie(w http.ResponseWriter, name string, value string) {
+	expire := time.Now().AddDate(0, 0, 1)
+	cookie := http.Cookie{
+		Name:    name,
+		Value:   value,
+		Expires: expire,
 	}
-	defer f.Close()
-
-	logger := log.New(f, "", log.LstdFlags)
-	logger.Println(value)
-
+	http.SetCookie(w, &cookie)
 }
+
+// Coockies set:
+//addCookie(w, "TestCookieName", "TestValue")

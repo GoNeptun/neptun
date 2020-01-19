@@ -14,24 +14,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package system_functions
+package SystemFunctions
 
 import (
-	"net/http"
-	"time"
+	"os"
 )
 
-// addCookie will apply a new cookie to the response of a http
-// request, with the key/value this method is passed.
-func addCookie(w http.ResponseWriter, name string, value string) {
-	expire := time.Now().AddDate(0, 0, 1)
-	cookie := http.Cookie{
-		Name:    name,
-		Value:   value,
-		Expires: expire,
+// fileExists checks if a file exists and is not a directory before we
+// try using it to prevent further errors.
+func FileExists(filename string) bool {
+	info, err := os.Stat(filename)
+	if os.IsNotExist(err) {
+		return false
 	}
-	http.SetCookie(w, &cookie)
+	return !info.IsDir()
 }
-
-// Coockies set:
-//addCookie(w, "TestCookieName", "TestValue")

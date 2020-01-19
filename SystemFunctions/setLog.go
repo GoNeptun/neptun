@@ -14,9 +14,40 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package system_functions
+package SystemFunctions
 
-var config_name string = "settings"
-var config_path string = "var/config"
+import (
+	"log"
+	"os"
+)
 
-var AesKey = []byte("H4fnCsMf4vbE60nK")
+func GetLogDir() string {
+	n := LoadConfig("server")
+	var logdir string = n[1]
+	return logdir
+}
+
+func SetLog(value string) {
+	p := "neptun.log"
+	WriteLog(value, p)
+}
+
+func SetErrorLog(value string) {
+	p := "error.neptun.log"
+	WriteLog(value, p)
+}
+
+func WriteLog(value string, p string) {
+	n := GetLogDir()
+	logdir := n + p
+	f, err := os.OpenFile(logdir,
+		os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	if err != nil {
+		log.Println(err)
+	}
+	defer f.Close()
+
+	logger := log.New(f, "", log.LstdFlags)
+	logger.Println(value)
+
+}

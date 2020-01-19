@@ -14,7 +14,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package web_server
+package WebServer
 
 import (
 	"fmt"
@@ -23,7 +23,7 @@ import (
 	"os"
 	//"time"
 	s "../semafor"
-	sf "../system_functions"
+	sf "../SystemFunctions"
 	"github.com/gorilla/mux"
 )
 

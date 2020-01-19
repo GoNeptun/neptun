@@ -14,28 +14,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package system_functions
+package SystemFunctions
 
 import (
-	"github.com/gomodule/redigo/redis"
+	"crypto/rand"
+	"encoding/base64"
+	"math"
 )
 
-// Store the redis connection as a package level variable
-var cache redis.Conn
-
-func GetRedisSettings() string {
-	n := LoadConfig("redis")
-	var RedisSettings string = n[0]
-	return RedisSettings
-}
-
-func InitCache() {
-	// Initialize the redis connection to a redis instance running on your local machine
-	n := GetRedisSettings()
-	conn, err := redis.DialURL(n)
-	if err != nil {
-		SetErrorLog(err.Error())
-	}
-	// Assign the connection to the package level `cache` variable
-	cache = conn
+func RandomString(l int) string {
+	buff := make([]byte, int(math.Round(float64(l)/float64(1.33333333333))))
+	rand.Read(buff)
+	str := base64.RawURLEncoding.EncodeToString(buff)
+	return str[:l] // strip the one extra byte we get from half the results.
 }

@@ -14,14 +14,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package system_functions
+package SystemFunctions
 
-type SiteSettTable struct {
-	Maint     int `db:"maintenance"`
-	Mail_Conf int `db:"mail_confirmation"`
-	Reg       int `db:"registration"`
-}
+var config_name string = "settings"
+var config_path string = "var/config"
 
-type error interface {
-	Error() string
-}
+var AesKey = []byte("H4fnCsMf4vbE60nK")

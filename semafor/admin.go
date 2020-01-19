@@ -17,8 +17,9 @@
 //Page for special rights
 package semafor
 
+
 import (
-	sf "../system_functions"
+	sf "../SystemFunctions"
 	"net/http"
 	"strconv"
 )

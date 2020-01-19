@@ -14,17 +14,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package system_functions
+package SystemFunctions
 
-import (
-	"crypto/rand"
-	"encoding/base64"
-	"math"
-)
+type SiteSettTable struct {
+	Maint     int `db:"maintenance"`
+	Mail_Conf int `db:"mail_confirmation"`
+	Reg       int `db:"registration"`
+}
 
-func RandomString(l int) string {
-	buff := make([]byte, int(math.Round(float64(l)/float64(1.33333333333))))
-	rand.Read(buff)
-	str := base64.RawURLEncoding.EncodeToString(buff)
-	return str[:l] // strip the one extra byte we get from half the results.
+type error interface {
+	Error() string
 }

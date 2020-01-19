@@ -17,7 +17,7 @@
 package semafor
 
 import (
-	sf "../system_functions"
+	sf "../SystemFunctions"
 	"github.com/microcosm-cc/bluemonday"
 	"net/http"
 	"strconv"
