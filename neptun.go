@@ -17,11 +17,11 @@
 package main
 
 import (
-	WebServer "./WebServer"
+	WebServer "./webserver"
 	"fmt"
 	"os"
 	//"time"
-	sf "./SystemFunctions"
+	sf "./systemfunctions"
 )
 
 func main() {

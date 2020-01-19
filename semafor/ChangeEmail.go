@@ -17,7 +17,7 @@
 package semafor
 
 import (
-	sf "../SystemFunctions"
+	sf "../systemfunctions"
 	"net/http"
 )
 

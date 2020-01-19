@@ -17,7 +17,7 @@
 package semafor
 
 import (
-	sf "../SystemFunctions"
+	sf "../systemfunctions"
 	"golang.org/x/crypto/bcrypt"
 	"net/http"
 	"strconv"

@@ -14,7 +14,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package SystemFunctions
+package systemfunctions
 
 var config_name string = "settings"
 var config_path string = "var/config"

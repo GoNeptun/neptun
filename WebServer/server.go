@@ -23,7 +23,7 @@ import (
 	"os"
 	//"time"
 	s "../semafor"
-	sf "../SystemFunctions"
+	sf "../systemfunctions"
 	"github.com/gorilla/mux"
 )
 

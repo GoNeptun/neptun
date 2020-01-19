@@ -17,7 +17,7 @@
 package semafor
 
 import (
-	sf "../SystemFunctions"
+	sf "../systemfunctions"
 	"encoding/json"
 	"fmt"
 	"io"

@@ -17,7 +17,7 @@
 package semafor
 
 import (
-	sf "../SystemFunctions"
+	sf "../systemfunctions"
 	"bytes"
 	"fmt"
 	"github.com/gomarkdown/markdown"

@@ -17,7 +17,7 @@
 package semafor
 
 import (
-	sf "../SystemFunctions"
+	sf "../systemfunctions"
 	"html/template"
 	"net/http"
 )
