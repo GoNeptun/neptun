@@ -10,7 +10,7 @@ A Fast Dynamic Content Framework (DCF) for building websites written in Go by [s
 Neptun is a  dynamic content framework written in Go.
 This is an independent project written from scratch. But we are inspired by the large number of templates created for [Hugo](https://github.com/gohugoio/hugo/) and came up with the idea of preserving the standard for data output and template functions set by Hugo. Thus, Neptune is 70% adapted to the expansion of templates written for Hugo
 
-**Complete documentation is available at [Neptun Documentation](https://goneptun.space/docs).**
+**Complete documentation is available at [Neptun Documentation](https://goneptune.space/docs).**
 
 
 # Getting Started
