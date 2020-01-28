@@ -1,25 +1,25 @@
-# Neptun CMS
+# Neptune CMS
 A Fast Dynamic Content Framework (DCF) for building websites written in Go by [sucsessyan](https://github.com/sucsessyan)
 
-[![GoDoc](https://godoc.org/github.com/goneptun/neptun?status.svg)](https://godoc.org/github.com/goneptun/neptun)
-[![Build Status](https://travis-ci.com/goneptun/neptun.png)](https://travis-ci.com/goneptun/neptun)
-[![Go Report Card](https://goreportcard.com/badge/github.com/goneptun/neptun)](https://goreportcard.com/report/github.com/goneptun/neptun)
+[![GoDoc](https://godoc.org/github.com/goneptune/neptune?status.svg)](https://godoc.org/github.com/goneptune/neptune)
+[![Build Status](https://travis-ci.com/goneptune/neptune.png)](https://travis-ci.com/goneptune/neptune)
+[![Go Report Card](https://goreportcard.com/badge/github.com/goneptune/neptune)](https://goreportcard.com/report/github.com/goneptune/neptune)
 
 ## Overview
 
-Neptun is a  dynamic content framework written in Go.
-This is an independent project written from scratch. But we are inspired by the large number of templates created for [Hugo](https://github.com/gohugoio/hugo/) and came up with the idea of preserving the standard for data output and template functions set by Hugo. Thus, Neptune is 70% adapted to the expansion of templates written for Hugo
+Neptune is a  dynamic content framework written in Go.
+This is an independent project written from scratch. But we are inspired by the large number of templates created for [Hugo](https://github.com/gohugoio/hugo/) and came up with the idea of preserving the standard for data output and template functions seted by Hugo. Thus, Neptune is 70% adapted to the expansion of templates written for Hugo
 
-**Complete documentation is available at [Neptun Documentation](https://goneptune.space/docs).**
+**Complete documentation is available at [Neptune Documentation](https://goneptune.space/docs).**
 
 
 # Getting Started
 
-## Installing Neptun
+## Installing Neptune
 
-Neptun is written in GoLang with support for Windows, Linux, FreeBSD and OSX.
+Neptune is written in GoLang with support for Windows, Linux, FreeBSD and OSX.
 
-# Use Neptun
+# Use Neptune
 
 Db SQL file location var/config/db.sql
 Config file location var/config/settings.toml
