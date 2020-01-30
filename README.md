@@ -1,4 +1,5 @@
-# Neptune CMS
+<img src="https://raw.githubusercontent.com/goneptune/neptune/master/var/www/Neptun/themes/base/static/img/cover.png" alt="Neptune" width="565" heigh="226">
+
 A Fast Dynamic Content Framework (DCF) for building websites written in Go by [sucsessyan](https://github.com/sucsessyan)
 
 [![GoDoc](https://godoc.org/github.com/goneptune/neptune?status.svg)](https://godoc.org/github.com/goneptune/neptune)
