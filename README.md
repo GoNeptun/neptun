@@ -1,4 +1,4 @@
-<img src="https://raw.githubusercontent.com/goneptune/neptune/master/var/www/Neptun/themes/base/static/img/cover.png" alt="Neptune" width="565" heigh="226">
+<img src="https://raw.githubusercontent.com/goneptune/neptune/master/var/www/Neptune/themes/base/static/img/cover.png" alt="Neptune" width="565" heigh="226">
 
 A Fast Dynamic Content Framework (DCF) for building websites written in Go by [sucsessyan](https://github.com/sucsessyan)
 
