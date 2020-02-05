@@ -1,6 +1,6 @@
 // Copyright 2019 Alexey Yanchenko <mail@yanchenko.me>
 //
-// This file is part of the Neptun library.
+// This file is part of the Neptune library.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -21,41 +21,47 @@ import (
 	"strconv"
 )
 
-func UpdateRegDataFromtDB(Value string) {
+func GetMemcachedSettings() string {
+	n := LoadConfig("memcached")
+	var serverset string = n[0] + ":" + n[1]
+	return serverset
+}
+
+func UpdateMainDataFromtDB(Value string) {
 	updatedData := [][]string{
-		{"registration", Value},
+		{"maintenance", Value},
 	}
 	UpdateRow("site_settings", updatedData, "id=1")
 }
 
-func ForbidRegistration() {
-	UpdateRegDataFromtDB("0")
+func ToMaintenance() {
+	UpdateMainDataFromtDB("1")
 	n := GetMemcachedSettings()
 	mc := memcache.New(n)
-	mc.Set(&memcache.Item{Key: "registration", Value: []byte("0"), Expiration: 0})
+	mc.Set(&memcache.Item{Key: "maintenance", Value: []byte("1"), Expiration: 0})
 
 }
 
-func AllowRegistration() {
-	UpdateRegDataFromtDB("1")
+func MakeAlive() {
+	UpdateMainDataFromtDB("0")
 	n := GetMemcachedSettings()
 	mc := memcache.New(n)
-	mc.Set(&memcache.Item{Key: "registration", Value: []byte("1"), Expiration: 0})
+	mc.Set(&memcache.Item{Key: "maintenance", Value: []byte("0"), Expiration: 0})
 
 }
 
-func CheckRegistration() bool {
+func CheckMaintenanceMode() bool {
 
 	n := GetMemcachedSettings()
 	mc := memcache.New(n)
-	it, err := mc.Get("registration")
+	it, err := mc.Get("maintenance")
 	// Get multiple values
 	//  it, err := mc.GetMulti([]string{"key_one", "key_two"})
 	if err != nil {
 
 		//There is no data in Mmecached
 		//Should get from DB
-		var n bool = GetSiteSettings("registration")
+		var n bool = GetSiteSettings("maintenance")
 		return n
 	}
 

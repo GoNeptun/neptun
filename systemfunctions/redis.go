@@ -1,6 +1,6 @@
 // Copyright 2019 Alexey Yanchenko <mail@yanchenko.me>
 //
-// This file is part of the Neptun library.
+// This file is part of the Neptune library.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,15 +17,25 @@
 package systemfunctions
 
 import (
-	"os"
+	"github.com/gomodule/redigo/redis"
 )
 
-// fileExists checks if a file exists and is not a directory before we
-// try using it to prevent further errors.
-func FileExists(filename string) bool {
-	info, err := os.Stat(filename)
-	if os.IsNotExist(err) {
-		return false
+// Store the redis connection as a package level variable
+var cache redis.Conn
+
+func GetRedisSettings() string {
+	n := LoadConfig("redis")
+	var RedisSettings string = n[0]
+	return RedisSettings
+}
+
+func InitCache() {
+	// Initialize the redis connection to a redis instance running on your local machine
+	n := GetRedisSettings()
+	conn, err := redis.DialURL(n)
+	if err != nil {
+		SetErrorLog(err.Error())
 	}
-	return !info.IsDir()
+	// Assign the connection to the package level `cache` variable
+	cache = conn
 }

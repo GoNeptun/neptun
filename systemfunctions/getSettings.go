@@ -1,6 +1,6 @@
 // Copyright 2019 Alexey Yanchenko <mail@yanchenko.me>
 //
-// This file is part of the Neptun library.
+// This file is part of the Neptune library.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,38 +16,26 @@
 
 package systemfunctions
 
-import (
-	"log"
-	"os"
-)
-
-func GetLogDir() string {
+func LoadContentDirectory() string {
 	n := LoadConfig("server")
-	var logdir string = n[1]
-	return logdir
+	m := GetSS("en", "theme")
+	r := n[4] + "themes/" + m + "/"
+	return r
+
 }
 
-func SetLog(value string) {
-	p := "neptun.log"
-	WriteLog(value, p)
+func LoadTitle() string {
+	n := ParamsConfig("en")
+	return n["title"].(string)
 }
 
-func SetErrorLog(value string) {
-	p := "error.neptun.log"
-	WriteLog(value, p)
+func BaseURL() string {
+	n := LoadConfig("server")
+	baseurl := n[2] + "/"
+	return baseurl
 }
 
-func WriteLog(value string, p string) {
-	n := GetLogDir()
-	logdir := n + p
-	f, err := os.OpenFile(logdir,
-		os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
-	if err != nil {
-		log.Println(err)
-	}
-	defer f.Close()
-
-	logger := log.New(f, "", log.LstdFlags)
-	logger.Println(value)
-
+func LangCode() string {
+	n := GetSS("en", "languageCode")
+	return n
 }

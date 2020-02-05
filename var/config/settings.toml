@@ -28,6 +28,6 @@
   port = "8090"
   ip = "127.0.0.1"
   baseurl = ""
-  content_dir = "var/www/Neptun/"
-  site_config_dir = "var/www/Neptun/config/"
+  content_dir = "var/www/Neptune/"
+  site_config_dir = "var/www/Neptune/config/"
   site_config_name = "settings"

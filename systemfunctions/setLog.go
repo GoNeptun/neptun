@@ -1,6 +1,6 @@
 // Copyright 2019 Alexey Yanchenko <mail@yanchenko.me>
 //
-// This file is part of the Neptun library.
+// This file is part of the Neptune library.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,12 +16,38 @@
 
 package systemfunctions
 
-type SiteSettTable struct {
-	Maint     int `db:"maintenance"`
-	MailConf int `db:"mail_confirmation"`
-	Reg       int `db:"registration"`
+import (
+	"log"
+	"os"
+)
+
+func GetLogDir() string {
+	n := LoadConfig("server")
+	var logdir string = n[1]
+	return logdir
 }
 
-type error interface {
-	Error() string
+func SetLog(value string) {
+	p := "Neptune.log"
+	WriteLog(value, p)
+}
+
+func SetErrorLog(value string) {
+	p := "error.Neptune.log"
+	WriteLog(value, p)
+}
+
+func WriteLog(value string, p string) {
+	n := GetLogDir()
+	logdir := n + p
+	f, err := os.OpenFile(logdir,
+		os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	if err != nil {
+		log.Println(err)
+	}
+	defer f.Close()
+
+	logger := log.New(f, "", log.LstdFlags)
+	logger.Println(value)
+
 }

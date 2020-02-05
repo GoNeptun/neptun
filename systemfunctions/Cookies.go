@@ -1,6 +1,6 @@
 // Copyright 2019 Alexey Yanchenko <mail@yanchenko.me>
 //
-// This file is part of the Neptun library.
+// This file is part of the Neptune library.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,7 +16,22 @@
 
 package systemfunctions
 
-var configname string = "settings"
-var configpath string = "var/config"
+import (
+	"net/http"
+	"time"
+)
 
-var AesKey = []byte("H4fnCsMf4vbE60nK")
+// addCookie will apply a new cookie to the response of a http
+// request, with the key/value this method is passed.
+func addCookie(w http.ResponseWriter, name string, value string) {
+	expire := time.Now().AddDate(0, 0, 1)
+	cookie := http.Cookie{
+		Name:    name,
+		Value:   value,
+		Expires: expire,
+	}
+	http.SetCookie(w, &cookie)
+}
+
+// Coockies set:
+//addCookie(w, "TestCookieName", "TestValue")

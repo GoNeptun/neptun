@@ -1,6 +1,6 @@
 // Copyright 2019 Alexey Yanchenko <mail@yanchenko.me>
 //
-// This file is part of the Neptun library.
+// This file is part of the Neptune library.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -28,7 +28,7 @@ func main() {
 
 	sf.CheckConfig()
 
-	sf.SetLog("Neptun Starting")
+	sf.SetLog("Neptune Starting")
 	sf.SetLog("Check config file...")
 
 	sf.SetLog("Check Database connection...")

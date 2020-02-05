@@ -1,6 +1,6 @@
 // Copyright 2019 Alexey Yanchenko <mail@yanchenko.me>
 //
-// This file is part of the Neptun library.
+// This file is part of the Neptune library.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -36,7 +36,7 @@ type Lino struct {
 }
 
 func ExitApp(w http.ResponseWriter, r *http.Request) {
-	var m string = "Neptun Stop \t"
+	var m string = "Neptune Stop \t"
 	sf.SetLog(m)
 	fmt.Printf(m)
 	os.Exit(3)
@@ -76,7 +76,7 @@ func StartService(port string) {
 	//Initiate redis cache
 	sf.InitCache()
 
-	var m string = "Server Neptun Starting. Listen []:" + port + "\t"
+	var m string = "Server Neptune Starting. Listen []:" + port + "\t"
 	sf.SetLog(m)
 	fmt.Printf(m)
 
