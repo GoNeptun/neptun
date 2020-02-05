@@ -19,7 +19,7 @@ package semafor
 
 
 import (
-	sf "../systemfunctions"
+	sf "github.com/goneptune/neptune/systemfunctions"
 	"net/http"
 	"strconv"
 )

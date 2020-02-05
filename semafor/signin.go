@@ -17,7 +17,7 @@
 package semafor
 
 import (
-	sf "../systemfunctions"
+	sf "github.com/goneptune/neptune/systemfunctions"
 	"golang.org/x/crypto/bcrypt"
 	"net/http"
 	"strconv"

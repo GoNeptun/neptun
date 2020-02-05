@@ -22,8 +22,8 @@ import (
 	"net/http"
 	"os"
 	//"time"
-	s "../semafor"
-	sf "../systemfunctions"
+	s "github.com/goneptune/neptune/semafor"
+	sf "github.com/goneptune/neptune/systemfunctions"
 	"github.com/gorilla/mux"
 )
 

@@ -17,11 +17,11 @@
 package main
 
 import (
-	WebServer "./webserver"
+	WebServer "github.com/goneptune/neptune/webserver"
 	"fmt"
 	"os"
 	//"time"
-	sf "./systemfunctions"
+	sf "github.com/goneptune/neptune/systemfunctions"
 )
 
 func main() {
