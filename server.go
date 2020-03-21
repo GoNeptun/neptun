@@ -14,7 +14,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package webserver
+package main
 
 import (
 	"fmt"
@@ -132,6 +132,6 @@ func StartService(port string) {
 	//Open Pages
 
 	//Server start
-	log.Fatal(http.ListenAndServe(":"+port, nil))
+//	log.Fatal(http.ListenAndServe(":"+port, nil))
 
 }

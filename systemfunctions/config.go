@@ -87,6 +87,10 @@ func CheckConfig() {
 			// Config file not found; ignore error if desired
 			var m string = "Config file was not found... \t"
 			fmt.Printf(m)
+		//	SetLog(m)
+			// Redirect to a Wizard setup page
+
+
 			SetErrorLog(m)
 			SetLog("Server stop")
 			os.Exit(3)
@@ -103,7 +107,7 @@ func CheckConfig() {
 	//Хэширование паролей
 	HashConfigPasswords()
 
-	SetLog("Config file... OK")
+	SetLog("Config file... OK it is BEST!")
 }
 
 func LoadConfig(conf string) []string {

@@ -17,7 +17,6 @@
 package main
 
 import (
-	WebServer "github.com/goneptune/neptune/webserver"
 	"fmt"
 	"os"
 	//"time"
@@ -47,9 +46,9 @@ func main() {
 	n := sf.LoadConfig("server")
 
 	if n[0] != "" {
-		WebServer.StartService(n[0])
+		StartService(n[0])
 	} else {
-		WebServer.StartService("8090")
+		StartService("8090")
 	}
 
 }
