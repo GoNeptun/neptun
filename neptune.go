@@ -21,7 +21,18 @@ import (
 	"os"
 	//"time"
 	sf "github.com/goneptune/neptune/systemfunctions"
+	"github.com/urfave/cli"
+
 )
+
+var app = cli.NewApp()
+
+func info() {
+  app.Name = "Neptune DCF"
+  app.Usage = "A Fast Dynamic Content Framework (DCF) for building websites"
+  app.Author = "Alexey Yanchenko"
+  app.Version = "0.1.0"
+}
 
 func main() {
 
@@ -42,6 +53,12 @@ func main() {
 		fmt.Printf("Server Stop \t")
 		os.Exit(3)
 	}
+
+	info()
+		err := app.Run(os.Args)
+	  if err != nil {
+	    sf.SetLog(err.Error())
+	  }
 
 	n := sf.LoadConfig("server")
 

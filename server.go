@@ -25,6 +25,7 @@ import (
 	s "github.com/goneptune/neptune/semafor"
 	sf "github.com/goneptune/neptune/systemfunctions"
 	"github.com/gorilla/mux"
+
 )
 
 type MT struct {
@@ -41,6 +42,8 @@ func ExitApp(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf(m)
 	os.Exit(3)
 }
+
+
 
 func faviconHandler(w http.ResponseWriter, r *http.Request) {
 	n := sf.LoadContentDirectory()
@@ -132,6 +135,6 @@ func StartService(port string) {
 	//Open Pages
 
 	//Server start
-//	log.Fatal(http.ListenAndServe(":"+port, nil))
+go	log.Fatal(http.ListenAndServe(":"+port, nil))
 
 }
